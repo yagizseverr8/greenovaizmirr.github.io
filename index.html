@@ -15,6 +15,7 @@
         body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
         .admin-only { display: none; }
+        .hero-bg { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542601906-973be1296162?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -27,23 +28,60 @@
             </div>
             <div class="hidden md:flex space-x-8 font-medium">
                 <a href="#home" class="hover:text-green-600 transition">Ana Sayfa</a>
+                <a href="#about" class="hover:text-green-600 transition">Biz Kimiz</a>
                 <a href="#gallery" class="hover:text-green-600 transition">Galeri</a>
             </div>
         </div>
     </nav>
 
-    <section id="home" class="h-screen flex items-center justify-center bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white pt-20">
+    <section id="home" class="h-screen flex items-center justify-center hero-bg text-white">
         <div class="text-center px-6">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 italic">GreeNova İzmir</h1>
-            <p class="text-xl md:text-2xl mb-8 text-green-100 max-w-2xl mx-auto font-light">Yeşilay ile temiz bir gelecek. 9-A sınıfı sunar.</p>
-            <a href="#gallery" class="bg-white text-green-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-100 transition shadow-xl inline-block">Galeriyi Keşfet</a>
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 italic tracking-tighter">GreeNova İzmir</h1>
+            <p class="text-xl md:text-2xl mb-8 text-green-100 max-w-2xl mx-auto font-light">Yeşilay ile temiz bir gelecek, doğayla barışık bir İzmir. 9-A sınıfı gururla sunar.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#gallery" class="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-xl inline-block">Galeriyi Gör</a>
+                <a href="#about" class="bg-white text-green-800 px-8 py-4 rounded-full font-bold text-lg hover:bg-green-100 transition shadow-xl inline-block">Proje Hakkında</a>
+            </div>
         </div>
     </section>
 
-    <section id="gallery" class="py-24 px-6 max-w-7xl mx-auto">
+    <section id="about" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="rounded-3xl shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 bg-green-600 text-white p-8 rounded-2xl hidden md:block">
+                        <p class="text-3xl font-bold">9-A</p>
+                        <p class="text-sm opacity-80 font-medium tracking-widest uppercase">İzmir Ekibi</p>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6">Biz Kimiz?</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Bizler, İzmir'in yarınlarını inşa eden genç çevrecileriz. 9-A sınıfı olarak, Yeşilay'ın değerlerini teknoloji ve sanatla birleştirerek bu platformu oluşturduk. 
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Amacımız, çevresel farkındalığı artırmak ve doğanın eşsiz güzelliklerini herkesle paylaşarak yeşil bir gelecek bırakmaktır. Sitemizdeki her kare, bizim temiz dünya hayalimizin bir parçasıdır.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100 text-center flex-1">
+                            <span class="block text-2xl font-bold text-green-700">9-A</span>
+                            <span class="text-xs text-gray-500 uppercase">Sınıfımız</span>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-xl border border-green-100 text-center flex-1">
+                            <span class="block text-2xl font-bold text-green-700">İzmir</span>
+                            <span class="text-xs text-gray-500 uppercase">Lokasyon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 px-6 max-w-7xl mx-auto border-t">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
             <div>
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">Proje Galerisi</h2>
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Etkinlik Galerisi</h2>
                 <div class="h-1.5 w-32 bg-green-600 rounded-full"></div>
             </div>
             
@@ -57,6 +95,11 @@
         <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             </div>
     </section>
+
+    <footer class="bg-gray-900 text-white py-12 px-6 text-center">
+        <p class="text-gray-400">© 2026 GreeNova İzmir - 9-A Sınıfı Projesi</p>
+        <p class="text-xs mt-2 text-gray-600 italic">Doğayı sev, geleceği koru.</p>
+    </footer>
 
     <script>
         // FIREBASE KONFIGURASYONU (SENİN BİLGİLERİN)
@@ -74,7 +117,7 @@
         const db = firebase.firestore();
         let isAdmin = false;
 
-        // VERİLERİ VERİTABANINDAN ÇEK
+        // VERİLERİ ÇEK
         function galeriyiGetir() {
             db.collection("galeri").orderBy("zaman", "desc").onSnapshot((snapshot) => {
                 const grid = document.getElementById('galeriGrid');
@@ -83,7 +126,7 @@
                     const foto = doc.data();
                     grid.innerHTML += `
                         <div class="relative group overflow-hidden rounded-2xl shadow-lg h-80 bg-gray-200">
-                            <img src="${foto.url}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                            <img src="${foto.url}" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
                             <button onclick="fotoSil('${doc.id}')" class="admin-only absolute top-4 right-4 bg-red-600 text-white font-bold px-3 py-1 rounded-lg hover:bg-red-700 z-20">SİL</button>
                         </div>`;
                 });
@@ -91,26 +134,19 @@
             });
         }
 
-        // FOTOĞRAF EKLE (KALICI)
+        // FOTOĞRAF EKLE
         async function fotoEkle() {
             const input = document.getElementById('photoInput');
             const btn = document.getElementById('yukleBtn');
-            
             if (input.files && input.files[0]) {
                 btn.disabled = true;
                 btn.innerText = "Yükleniyor...";
-                
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     try {
-                        await db.collection("galeri").add({
-                            url: e.target.result,
-                            zaman: Date.now()
-                        });
+                        await db.collection("galeri").add({ url: e.target.result, zaman: Date.now() });
                         input.value = '';
-                    } catch (error) {
-                        alert("Hata: Firestore kurallarını 'true' yaptığından emin ol!");
-                    }
+                    } catch (e) { alert("Hata! Firestore Rules açık mı?"); }
                     btn.disabled = false;
                     btn.innerText = "Yükle";
                 };
@@ -118,20 +154,18 @@
             }
         }
 
-        // FOTOĞRAF SİL (KALICI)
+        // FOTOĞRAF SİL
         function fotoSil(id) {
-            if(confirm('Bu resim herkesten silinecek!')) {
-                db.collection("galeri").doc(id).delete();
-            }
+            if(confirm('Resmi kalıcı olarak sil?')) { db.collection("galeri").doc(id).delete(); }
         }
 
-        // GİZLİ GİRİŞ (L TUŞU)
+        // L TUŞU İLE PANELİ AÇ
         window.addEventListener('keydown', (e) => {
             if (e.key.toLowerCase() === 'l') {
-                const sifre = prompt('Şifre:');
-                if (sifre === 'greenova9a') {
+                if (prompt('Şifre:') === 'greenova9a') {
                     isAdmin = true;
                     adminPaneliniGuncelle();
+                    alert('Yönetici modu aktif!');
                 }
             }
         });
