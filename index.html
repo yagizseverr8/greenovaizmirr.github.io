@@ -86,11 +86,13 @@
     </footer>
 
     <script>
-        // Başlangıç Fotoğrafları
-        let fotograflar = [
+        // 1. HAFIZADAN VERİLERİ ÇEK VEYA BOŞSA BAŞLANGIÇ FOTOĞRAFLARINI KOY
+        let varsayilanFotolar = [
             { id: 1, url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09' },
             { id: 2, url: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b' }
         ];
+
+        let fotograflar = JSON.parse(localStorage.getItem('greenova_galeri')) || varsayilanFotolar;
 
         // SAYFA AÇILIŞINDA ÇALIŞAN KONTROL
         window.onload = function() {
@@ -107,7 +109,7 @@
                 if(sifre === "greenova9a") {
                     localStorage.setItem('greenova_admin', 'true');
                     document.body.classList.add('logged-in');
-                    alert("Hoş geldin! Yönetici modu aktif ve tarayıcıya kaydedildi.");
+                    alert("Hoş geldin! Yönetici modu aktif.");
                     galeriyiGoster();
                 } else {
                     alert("Hatalı şifre!");
@@ -120,7 +122,7 @@
             if (e.key === 'x' || e.key === 'X') {
                 localStorage.removeItem('greenova_admin');
                 document.body.classList.remove('logged-in');
-                alert("Yönetici yetkileri bu tarayıcıdan silindi.");
+                alert("Yönetici yetkileri silindi.");
                 galeriyiGoster();
             }
         });
@@ -140,6 +142,7 @@
         function fotoSil(id) {
             if(confirm('Bu görseli galeriden kaldırmak istiyor musun?')) {
                 fotograflar = fotograflar.filter(f => f.id !== id);
+                hafizayaKaydet(); // Sildikten sonra kaydet
                 galeriyiGoster();
             }
         }
@@ -149,11 +152,19 @@
             if(input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
+                    // Yeni fotoğrafı en başa ekle
                     fotograflar.unshift({ id: Date.now(), url: e.target.result });
+                    hafizayaKaydet(); // Ekledikten sonra kaydet
                     galeriyiGoster();
+                    input.value = ""; // Inputu temizle
                 };
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        // VERİLERİ LOCALSTORAGE'A KAYDEDEN FONKSİYON
+        function hafizayaKaydet() {
+            localStorage.setItem('greenova_galeri', JSON.stringify(fotograflar));
         }
     </script>
 </body>
