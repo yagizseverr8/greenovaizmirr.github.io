@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreeNova | Sağlıklı Yaşam Ligi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase Kütüphaneleri -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         .admin-only { display: none; }
         .logged-in .admin-only { display: block; }
         html { scroll-behavior: smooth; }
+        .galeri-card:hover img { transform: scale(1.05); transition: 0.5s; }
     </style>
 </head>
 <body class="bg-white text-gray-800">
 
+    <!-- NAVİGASYON -->
     <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-green-100">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-green-600 uppercase">GreeNova İzmir</div>
+            <div class="text-2xl font-black text-green-600 tracking-tighter uppercase">GreeNova İzmir</div>
             <div class="space-x-6 font-semibold text-sm">
                 <a href="#anasayfa" class="hover:text-green-500">Anasayfa</a>
                 <a href="#biz-kimiz" class="hover:text-green-500">Biz Kimiz</a>
@@ -26,125 +29,164 @@
         </div>
     </nav>
 
+    <!-- GİRİŞ (HERO) -->
     <header id="anasayfa" class="py-20">
-        <div class="container mx-auto px-6 text-center lg:text-left flex flex-wrap items-center">
+        <div class="container mx-auto px-6 flex flex-wrap items-center">
             <div class="w-full lg:w-3/5">
-                <h1 class="text-5xl font-extrabold mb-6">Proje Kimliği</h1>
-                <div class="bg-green-50 p-6 border-l-8 border-green-600 rounded">
-                    <p class="text-xl italic">"Bağımlılıkla mücadele ve sağlıklı yaşam için yenilikçi eğitim modeli."</p>
+                <h2 class="text-green-600 font-bold uppercase tracking-widest mb-2">Yeşilay Sağlıklı Yaşam Ligi</h2>
+                <h1 class="text-5xl font-extrabold mb-6 text-gray-900">Proje Kimliği</h1>
+                <div class="bg-green-50 p-6 border-l-8 border-green-600 rounded-r-lg shadow-sm">
+                    <p class="text-xl italic leading-relaxed">
+                        "Bağımlılıkla mücadele ve sağlıklı yaşam alışkanlıkları için geliştirilmiş, uygulama odaklı yenilikçi bir eğitim modelidir."
+                    </p>
                 </div>
+            </div>
+            <div class="w-full lg:w-2/5 mt-10 lg:mt-0">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=600" class="rounded-3xl shadow-2xl">
             </div>
         </div>
     </header>
 
-    <section id="galeri" class="py-24 bg-white border-t">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-12">Galeri</h2>
-
-            <!-- ADMİN PANELİ -->
-            <div id="adminPanel" class="admin-only bg-green-50 p-8 rounded-2xl mb-12 max-w-xl mx-auto border-2 border-dashed border-green-300">
-                <input type="file" id="photoInput" accept="image/*" class="mb-4 block w-full text-sm">
-                <button onclick="fotoEkle()" id="yukleBtn" class="bg-green-600 text-white px-10 py-3 rounded-xl font-bold w-full uppercase shadow-lg">FOTOĞRAFI YAYINLA</button>
-            </div>
-
-            <!-- FOTOĞRAF GRİDİ -->
-            <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Burası Firebase'den dolacak -->
+    <!-- BİZ KİMİZ -->
+    <section id="biz-kimiz" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap items-center flex-row-reverse">
+                <div class="w-full lg:w-1/2 lg:pl-12">
+                    <h2 class="text-3xl font-bold text-green-600 mb-6 uppercase">Biz kimiz?</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        Biz, <strong>Ahmet Hakkı Balcıoğlu Ticaret Mesleki ve Teknik Anadolu Lisesi 9-A sınıfının</strong> ekibi; <strong>GreeNova’yız!</strong> 
+                        Yeşilay vizyonuyla, geleceği daha sağlıklı ve bağımlılıktan uzak bir şekilde inşa etmek için buradayız.
+                    </p>
+                    <div class="bg-green-600 text-white p-6 rounded-2xl shadow-lg inline-block">
+                        <p class="text-xl font-bold italic">"Geleceği biz tasarlıyoruz!"</p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=600" class="rounded-3xl shadow-xl">
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- GALERİ -->
+    <section id="galeri" class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-2 uppercase">Galeri</h2>
+            <p class="text-green-600 mb-12 italic text-lg">Sağlıklı Yaşamdan Kareler</p>
+
+            <!-- ADMİN PANELİ -->
+            <div id="adminPanel" class="admin-only bg-green-50 p-8 rounded-2xl mb-12 max-w-xl mx-auto border-2 border-dashed border-green-300">
+                <h3 class="font-bold text-green-800 mb-4">Yeni Fotoğraf Ekle</h3>
+                <input type="file" id="photoInput" accept="image/*" class="mb-4 block w-full text-sm">
+                <button onclick="fotoEkle()" id="yukleBtn" class="bg-green-600 text-white px-10 py-3 rounded-xl font-bold w-full uppercase hover:bg-green-700 transition">YAYINLA</button>
+            </div>
+
+            <!-- FOTOĞRAF DİZİNİ -->
+            <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Veriler Firebase'den buraya akacak -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 text-center text-xs tracking-widest uppercase">
+        <p>&copy; 2026 GREENOVA İZMİR | 9-A SINIFI PROJESİ</p>
+    </footer>
+
     <script>
-        // --- BURAYI KENDİ BİLGİLERİNLE DOLDUR ---
+        // --- BU KISMI KENDİ FIREBASE BİLGİLERİNLE DOLDUR ---
         const firebaseConfig = {
-            apiKey: "SENİN_KEYİN",
-            authDomain: "SENİN_PROJEN.firebaseapp.com",
-            databaseURL: "https://SENİN_PROJEN-default-rtdb.firebaseio.com",
-            projectId: "SENİN_PROJEN",
-            storageBucket: "SENİN_PROJEN.appspot.com",
+            apiKey: "SENİN_API_KEYİN",
+            authDomain: "PROJE_ADIN.firebaseapp.com",
+            databaseURL: "https://PROJE_ADIN-default-rtdb.firebaseio.com",
+            projectId: "PROJE_ADIN",
+            storageBucket: "PROJE_ADIN.appspot.com",
             messagingSenderId: "ID",
             appId: "APP_ID"
         };
 
+        // Firebase Başlatma
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // 1. VERİLERİ ANLIK ÇEK VE GÖSTER
+        // Admin Durum Kontrolü
+        if (localStorage.getItem('greenova_admin') === 'true') {
+            document.body.classList.add('logged-in');
+        }
+
+        // 1. VERİLERİ ÇEKME (Anlık Güncelleme)
         database.ref('fotograflar').on('value', (snapshot) => {
             const grid = document.getElementById('galeriGrid');
             grid.innerHTML = '';
             const data = snapshot.val();
             
             if (data) {
-                // Firebase'in her fotoğrafa verdiği benzersiz KEY'i (id) kullanıyoruz
+                // Firebase Key kullanarak her fotoğrafa özel kimlik veriyoruz
                 Object.keys(data).reverse().forEach(key => {
                     grid.innerHTML += `
-                        <div class="relative rounded-2xl shadow-xl h-64 overflow-hidden bg-gray-100">
+                        <div class="relative rounded-2xl shadow-xl h-64 overflow-hidden galeri-card bg-gray-100">
                             <img src="${data[key].url}" class="w-full h-full object-cover">
-                            <button onclick="fotoSil('${key}')" class="admin-only absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded shadow-lg hover:bg-red-700 transition">SİL</button>
+                            <button onclick="fotoSil('${key}')" class="admin-only absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-lg font-bold shadow-2xl hover:bg-red-700">SİL</button>
                         </div>`;
                 });
             } else {
-                grid.innerHTML = '<p class="text-gray-400 col-span-full italic">Galeri boş.</p>';
+                grid.innerHTML = '<p class="text-gray-400 col-span-full italic">Henüz fotoğraf yüklenmemiş.</p>';
             }
         });
 
-        // 2. FOTOĞRAF EKLEME (BUGSUZ VERSİYON)
+        // 2. FOTOĞRAF EKLEME
         function fotoEkle() {
             const input = document.getElementById('photoInput');
             const btn = document.getElementById('yukleBtn');
-            
-            if (!input.files[0]) {
-                alert("Önce bir fotoğraf seç kanka!");
-                return;
-            }
 
-            btn.disabled = true;
-            btn.innerText = "YÜKLENİYOR...";
+            if(input.files && input.files[0]) {
+                btn.disabled = true;
+                btn.innerText = "YÜKLENİYOR...";
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                // 'push' kullanarak her fotoğrafa benzersiz bir Firebase anahtarı oluşturuyoruz
-                database.ref('fotograflar').push({
-                    url: e.target.result,
-                    tarih: Date.now()
-                }).then(() => {
-                    alert("Eklendi!");
-                    input.value = '';
-                    btn.disabled = false;
-                    btn.innerText = "FOTOĞRAFI YAYINLA";
-                }).catch(err => {
-                    alert("Firebase Hatası! Kuralları (Rules) kontrol ettin mi?");
-                    console.error(err);
-                    btn.disabled = false;
-                    btn.innerText = "FOTOĞRAFI YAYINLA";
-                });
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        // 3. NOKTA ATIŞI SİLME (Hangi anahtara basılırsa sadece o gider)
-        function fotoSil(firebaseKey) {
-            if(confirm('Sadece bu görsel silinecek, emin misin?')) {
-                database.ref('fotograflar/' + firebaseKey).remove();
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // .push() sayesinde Firebase her resme benzersiz bir ID verir (Hatalı silmeyi önler)
+                    database.ref('fotograflar').push({
+                        url: e.target.result,
+                        tarih: Date.now()
+                    }).then(() => {
+                        btn.disabled = false;
+                        btn.innerText = "YAYINLA";
+                        input.value = '';
+                        alert("Fotoğraf başarıyla eklendi!");
+                    }).catch(err => {
+                        alert("Hata! Firebase Rules ayarlarını yaptın mı?");
+                        console.error(err);
+                        btn.disabled = false;
+                        btn.innerText = "YAYINLA";
+                    });
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                alert("Lütfen önce bir dosya seç!");
             }
         }
 
-        // 4. ADMİN GİRİŞİ
-        window.onload = () => {
-            if (localStorage.getItem('greenova_admin') === 'true') document.body.classList.add('logged-in');
-        };
+        // 3. NOKTA ATIŞI SİLME
+        function fotoSil(key) {
+            if(confirm('Bu fotoğrafı silmek istediğine emin misin?')) {
+                database.ref('fotograflar/' + key).remove();
+            }
+        }
 
+        // 4. KLAVYE KONTROLLERİ (Admin Giriş/Çıkış)
         document.addEventListener('keydown', (e) => {
+            // L tuşu ile giriş
             if (e.key.toLowerCase() === 'l') {
                 if(prompt("Şifre:") === "greenova9a") {
                     localStorage.setItem('greenova_admin', 'true');
                     document.body.classList.add('logged-in');
                 }
             }
+            // X tuşu ile çıkış
             if (e.key.toLowerCase() === 'x') {
                 localStorage.removeItem('greenova_admin');
                 document.body.classList.remove('logged-in');
+                alert("Admin çıkışı yapıldı.");
             }
         });
     </script>
