@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreeNova | Sağlıklı Yaşam Ligi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK (Bulut Bağlantısı İçin) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         .admin-only { display: none; }
         .logged-in .admin-only { display: block; }
@@ -69,15 +72,17 @@
             <h2 class="text-4xl font-bold mb-2">Galeri</h2>
             <p class="text-green-600 mb-12 italic text-lg underline decoration-green-200">Sağlık ve İyilik Hareketi'nden Kareler</p>
 
+            <!-- Admin Paneli (Sadece şifre girince açılır) -->
             <div id="adminPanel" class="admin-only bg-green-50 border-2 border-dashed border-green-300 p-8 rounded-2xl mb-12 max-w-xl mx-auto shadow-inner">
-                <h3 class="font-bold text-green-800 mb-4 uppercase tracking-tighter">Yeni Fotoğraf Yükle (Admin)</h3>
+                <h3 class="font-bold text-green-800 mb-4 uppercase tracking-tighter">Yeni Fotoğraf Yükle (Buluta)</h3>
                 <input type="file" id="photoInput" class="mb-4 block w-full text-sm text-gray-500 file:bg-green-600 file:text-white file:rounded-full file:border-0 file:px-6 file:py-2 file:font-bold file:cursor-pointer">
-                <button onclick="fotoEkle()" class="bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-xl font-bold w-full transition shadow-lg">GALERİDE YAYINLA</button>
+                <button id="uploadBtn" onclick="fotoEkle()" class="bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-xl font-bold w-full transition shadow-lg">HERKES İÇİN YAYINLA</button>
                 <p class="mt-4 text-xs text-gray-400 font-medium tracking-widest uppercase italic">Çıkış yapmak için 'X' tuşuna bas</p>
             </div>
 
             <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                </div>
+                <!-- Fotoğraflar Firebase'den buraya gelecek -->
+            </div>
         </div>
     </section>
 
@@ -86,86 +91,101 @@
     </footer>
 
     <script>
-        // 1. HAFIZADAN VERİLERİ ÇEK VEYA BOŞSA BAŞLANGIÇ FOTOĞRAFLARINI KOY
-        let varsayilanFotolar = [
-            { id: 1, url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09' },
-            { id: 2, url: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b' }
-        ];
+        // EKRAN GÖRÜNTÜSÜNDEKİ (image_8f345e.jpg) BİLGİLERİN:
+        const firebaseConfig = {
+            apiKey: "AIzaSyCyEAtDHNqfPdYDnjZwu4WE0s_IXYFbXq0",
+            authDomain: "greenovagaleri.firebaseapp.com",
+            databaseURL: "https://greenovagaleri-default-rtdb.firebaseio.com",
+            projectId: "greenovagaleri",
+            storageBucket: "greenovagaleri.firebasestorage.app",
+            messagingSenderId: "536132033624",
+            appId: "1:536132033624:web:08e804a77ede95bfa83e2d",
+            measurementId: "G-E0QYHFMQJW"
+        };
 
-        let fotograflar = JSON.parse(localStorage.getItem('greenova_galeri')) || varsayilanFotolar;
+        // Firebase Başlat
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-        // SAYFA AÇILIŞINDA ÇALIŞAN KONTROL
+        // 1. Verileri Buluttan Dinle (Herkes görsün diye)
+        database.ref('galeri').on('value', (snapshot) => {
+            const grid = document.getElementById('galeriGrid');
+            grid.innerHTML = '';
+            const data = snapshot.val();
+            if (data) {
+                Object.keys(data).reverse().forEach(key => {
+                    grid.innerHTML += `
+                        <div class="relative group overflow-hidden rounded-2xl shadow-xl h-72">
+                            <img src="${data[key].url}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                            <button onclick="fotoSil('${key}')" class="admin-only absolute top-4 right-4 bg-red-600 text-white font-bold px-4 py-2 rounded-lg hover:bg-red-700 shadow-2xl transition z-20">SİL</button>
+                        </div>`;
+                });
+            }
+        });
+
+        // 2. Buluta Fotoğraf Ekle
+        function fotoEkle() {
+            const input = document.getElementById('photoInput');
+            const btn = document.getElementById('uploadBtn');
+            if(!input.files[0]) return alert("Lütfen bir fotoğraf seç!");
+
+            btn.disabled = true;
+            btn.innerText = "BULUTA GÖNDERİLİYOR...";
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1000;
+                    const scale = MAX_WIDTH / img.width;
+                    canvas.width = MAX_WIDTH;
+                    canvas.height = img.height * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    const compressed = canvas.toDataURL('image/jpeg', 0.7);
+
+                    database.ref('galeri').push({
+                        url: compressed,
+                        tarih: Date.now()
+                    }).then(() => {
+                        btn.disabled = false;
+                        btn.innerText = "HERKES İÇİN YAYINLA";
+                        input.value = '';
+                    });
+                };
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        // 3. Buluttan Fotoğraf Sil
+        function fotoSil(key) {
+            if(confirm('Bu fotoğraf tüm ziyaretçilerden silinsin mi?')) {
+                database.ref('galeri/' + key).remove();
+            }
+        }
+
+        // 4. Yönetici Giriş Sistemi
         window.onload = function() {
             if (localStorage.getItem('greenova_admin') === 'true') {
                 document.body.classList.add('logged-in');
             }
-            galeriyiGoster();
         };
 
-        // GİZLİ PANELİ AÇ (Klavyeden 'L' tuşu)
         document.addEventListener('keydown', function(e) {
             if (e.key === 'l' || e.key === 'L') {
                 let sifre = prompt("GreeNova İzmir Yönetici Girişi:");
                 if(sifre === "greenova9a") {
                     localStorage.setItem('greenova_admin', 'true');
                     document.body.classList.add('logged-in');
-                    alert("Hoş geldin! Yönetici modu aktif.");
-                    galeriyiGoster();
-                } else {
-                    alert("Hatalı şifre!");
                 }
             }
-        });
-
-        // YETKİYİ KALDIR (Klavyeden 'X' tuşu)
-        document.addEventListener('keydown', function(e) {
             if (e.key === 'x' || e.key === 'X') {
                 localStorage.removeItem('greenova_admin');
                 document.body.classList.remove('logged-in');
-                alert("Yönetici yetkileri silindi.");
-                galeriyiGoster();
             }
         });
-
-        function galeriyiGoster() {
-            const grid = document.getElementById('galeriGrid');
-            grid.innerHTML = '';
-            fotograflar.forEach(foto => {
-                grid.innerHTML += `
-                    <div class="relative group overflow-hidden rounded-2xl shadow-xl h-72">
-                        <img src="${foto.url}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
-                        <button onclick="fotoSil(${foto.id})" class="admin-only absolute top-4 right-4 bg-red-600 text-white font-bold px-4 py-2 rounded-lg hover:bg-red-700 shadow-2xl transition z-20">SİL</button>
-                    </div>`;
-            });
-        }
-
-        function fotoSil(id) {
-            if(confirm('Bu görseli galeriden kaldırmak istiyor musun?')) {
-                fotograflar = fotograflar.filter(f => f.id !== id);
-                hafizayaKaydet(); // Sildikten sonra kaydet
-                galeriyiGoster();
-            }
-        }
-
-        function fotoEkle() {
-            const input = document.getElementById('photoInput');
-            if(input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Yeni fotoğrafı en başa ekle
-                    fotograflar.unshift({ id: Date.now(), url: e.target.result });
-                    hafizayaKaydet(); // Ekledikten sonra kaydet
-                    galeriyiGoster();
-                    input.value = ""; // Inputu temizle
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // VERİLERİ LOCALSTORAGE'A KAYDEDEN FONKSİYON
-        function hafizayaKaydet() {
-            localStorage.setItem('greenova_galeri', JSON.stringify(fotograflar));
-        }
     </script>
 </body>
 </html>
