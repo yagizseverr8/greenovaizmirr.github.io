@@ -3,113 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreeNova İzmir | 9-A Projesi</title>
+    <title>GreeNova | Sağlıklı Yaşam Ligi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .admin-box { border: 2px dashed #4ade80; border-radius: 20px; background-color: #f0fdf4; }
+        .admin-only { display: none; }
+        .logged-in .admin-only { display: block; }
+        html { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-white text-gray-800">
 
-    <!-- NAVBAR -->
-    <nav class="flex justify-between items-center px-12 py-6 border-b border-gray-100 sticky top-0 bg-white z-50">
-        <div class="text-green-600 font-black text-2xl tracking-tighter uppercase">GREENOVA İZMİR</div>
-        <div class="space-x-8 text-gray-700 font-medium text-sm">
-            <a href="#home" class="hover:text-green-600">Anasayfa</a>
-            <a href="#about" class="hover:text-green-600">Biz Kimiz</a>
-            <a href="#gallery" class="hover:text-green-600">Galeri</a>
+    <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-green-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black text-green-600 tracking-tighter uppercase">GreeNova İzmir</div>
+            <div class="space-x-6 font-semibold text-sm md:text-base">
+                <a href="#anasayfa" class="hover:text-green-500 transition">Anasayfa</a>
+                <a href="#biz-kimiz" class="hover:text-green-500 transition">Biz Kimiz</a>
+                <a href="#galeri" class="hover:text-green-500 transition">Galeri</a>
+            </div>
         </div>
     </nav>
 
-    <!-- PROJE KİMLİĞİ (GÖRSEL 1 - image_90a801.jpg) -->
-    <section id="home" class="px-12 py-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 border-b">
-        <div class="flex-1">
-            <p class="text-green-500 font-bold text-sm tracking-widest mb-4 uppercase">Yeşilay Sağlıklı Yaşam Ligi – İzmir</p>
-            <h1 class="text-6xl font-extrabold text-slate-900 leading-[1.1] mb-8">Proje Kimliği ve Yasal Dayanak</h1>
-            <div class="border-l-8 border-green-500 pl-6 py-2 bg-green-50/50 rounded-r-xl">
-                <p class="text-gray-600 italic text-lg leading-relaxed">
-                    "Bağımlılıkla mücadele, sağlıklı yaşam alışkanlıklarının kazandırılması ve öğrencilerin iyi oluş (well-being) düzeylerinin artırılmasına yönelik geliştirilen; okul temelli, uygulama odaklı ve ölçülebilir çıktılar içeren yenilikçi bir eğitim modelidir."
-                </p>
-            </div>
-        </div>
-        <div class="flex-1">
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="rounded-[40px] shadow-2xl w-full object-cover aspect-[4/3]">
-        </div>
-    </section>
-
-    <!-- BİZ KİMİZ? (GÖRSEL 2 - image_90a7fa.jpg) -->
-    <section id="about" class="px-12 py-24 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 bg-white border-b">
-        <div class="flex-1">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="rounded-[40px] shadow-xl w-full object-cover aspect-square md:aspect-video">
-        </div>
-        <div class="flex-1 text-left">
-            <h2 class="text-3xl font-bold text-green-600 mb-6 uppercase tracking-tight">BİZ KİMİZ?</h2>
-            <div class="text-gray-700 space-y-6 leading-relaxed text-lg">
-                <p>Biz, <strong>Ahmet Hakkı Balcıoğlu Ticaret Meslek ve Teknik Anadolu Lisesi 9-A sınıfının</strong> enerjisi hiç bitmeyen ekibi; nam-ı diğer <strong>GreeNova'yız!</strong> Doğayı korumanın sadece bir görev değil, aynı zamanda bir yaşam tarzı olduğuna inanıyoruz.</p>
-                <p>Bizim için "yeşil" sadece bir renk değil; umut, yenilik ve değişimin simgesi. Kimi zaman bir fikirle dünyayı güzelleştirmenin mümkün olduğuna inanıyoruz.</p>
-            </div>
-            <div class="mt-8 bg-green-600 text-white p-6 rounded-2xl font-bold text-center text-xl shadow-lg">
-                "Biz sadece projeler üretmiyoruz; geleceği de tasarlıyoruz!"
-            </div>
-        </div>
-    </section>
-
-    <!-- GALERİ (GÖRSEL 3 - image_90a7e0.jpg) -->
-    <section id="gallery" class="px-12 py-20 bg-white min-h-screen">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-5xl font-bold text-slate-800 mb-2">Galeri</h2>
-            <p class="text-green-600 italic mb-12 text-lg">Sağlık ve İyilik Hareketi'nden Kareler</p>
-
-            <!-- ADMİN YÜKLEME PANELİ -->
-            <div class="admin-box p-12 mb-16 shadow-sm">
-                <p class="text-green-700 font-bold text-sm mb-6 tracking-widest uppercase">YENİ FOTOĞRAF YÜKLE (ADMİN)</p>
-                <div class="flex flex-col items-center gap-6">
-                    <div class="flex items-center gap-4">
-                        <label class="bg-green-600 text-white px-6 py-2 rounded-full font-bold cursor-pointer hover:bg-green-700">
-                            Dosya Seç <input type="file" id="fotoInput" class="hidden" onchange="document.getElementById('fileName').innerText = this.files[0].name">
-                        </label>
-                        <span id="fileName" class="text-gray-400 text-sm italic">Dosya seçilmedi</span>
-                    </div>
-                    <button onclick="fotoEkle()" id="yukleBtn" class="w-full bg-green-500 text-white py-4 rounded-2xl font-black text-xl hover:bg-green-600 transition-all uppercase shadow-md">
-                        GALERİDE YAYINLA
-                    </button>
-                    <p class="text-gray-400 text-[10px] uppercase tracking-widest">ÇIKIŞ YAPMAK İÇİN 'X' TUŞUNA BAS</p>
+    <header id="anasayfa" class="min-h-[80vh] flex items-center bg-white">
+        <div class="container mx-auto px-6 py-12 flex flex-wrap items-center">
+            <div class="w-full lg:w-3/5">
+                <h2 class="text-green-600 font-bold uppercase tracking-widest mb-2">Yeşilay Sağlıklı Yaşam Ligi – İzmir</h2>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">Proje Kimliği ve Yasal Dayanak</h1>
+                <div class="bg-green-50 p-6 border-l-8 border-green-600 rounded-r-lg shadow-sm mb-6">
+                    <p class="text-xl text-gray-700 italic leading-relaxed text-justify">
+                        "Bağımlılıkla mücadele, sağlıklı yaşam alışkanlıklarının kazandırılması ve öğrencilerin iyi oluş (well-being) düzeylerinin artırılmasına yönelik geliştirilen; okul temelli, uygulama odaklı ve ölçülebilir çıktılar içeren yenilikçi bir eğitim modelidir."
+                    </p>
                 </div>
             </div>
+            <div class="w-full lg:w-2/5 flex justify-center mt-8 lg:mt-0">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" class="rounded-3xl shadow-2xl border-8 border-green-50">
+            </div>
+        </div>
+    </header>
 
-            <!-- FOTOĞRAF AKIŞI -->
-            <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Buraya Manuel Eklenenler Gelecek -->
+    <section id="biz-kimiz" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap items-center flex-row-reverse">
+                <div class="w-full lg:w-1/2 lg:pl-12">
+                    <h2 class="text-3xl font-bold text-green-600 mb-4 tracking-tight uppercase">Biz kimiz?</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">
+                        Biz, <strong>Ahmet Hakkı Balcıoğlu Ticaret Mesleki ve Teknik Anadolu Lisesi 9-A sınıfının</strong> enerjisi hiç bitmeyen ekibi; nam-ı diğer <strong>GreeNova’yız!</strong> 
+                        Doğayı korumanın sadece bir görev değil, aynı zamanda bir yaşam tarzı olduğuna inanıyoruz. Sağlık ve İyilik Hareketi gönüllüleri olarak; geri dönüşümden sürdürülebilir yaşama kadar pek çok konuda üretmeyi ve harekete geçmeyi seviyoruz.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed italic">
+                        Bizim için “yeşil” sadece bir renk değil; umut, yenilik ve değişimin simgesi. Kimi zaman bir fikirle, kimi zaman bir projeyle dünyayı güzelleştirmenin mümkün olduğuna inanıyoruz.
+                    </p>
+                    <div class="bg-green-600 text-white p-6 rounded-2xl shadow-lg">
+                        <p class="text-xl font-bold italic">"Biz sadece projeler üretmiyoruz; geleceği de tasarlıyoruz!"</p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 mt-12 lg:mt-0">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000" class="rounded-3xl shadow-xl">
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 text-center text-gray-400 text-xs">
-        © 2026 GreeNova İzmir | 9-A Projesi
+    <section id="galeri" class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-2">Galeri</h2>
+            <p class="text-green-600 mb-12 italic text-lg underline decoration-green-200">Sağlık ve İyilik Hareketi'nden Kareler</p>
+
+            <div id="adminPanel" class="admin-only bg-green-50 border-2 border-dashed border-green-300 p-8 rounded-2xl mb-12 max-w-xl mx-auto shadow-inner">
+                <h3 class="font-bold text-green-800 mb-4 uppercase tracking-tighter">Yeni Fotoğraf Yükle (Admin)</h3>
+                <input type="file" id="photoInput" class="mb-4 block w-full text-sm text-gray-500 file:bg-green-600 file:text-white file:rounded-full file:border-0 file:px-6 file:py-2 file:font-bold file:cursor-pointer">
+                <button onclick="fotoEkle()" class="bg-green-600 hover:bg-green-700 text-white px-10 py-3 rounded-xl font-bold w-full transition shadow-lg">GALERİDE YAYINLA</button>
+                <p class="mt-4 text-xs text-gray-400 font-medium tracking-widest uppercase italic">Çıkış yapmak için 'X' tuşuna bas</p>
+            </div>
+
+            <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 text-center text-xs tracking-widest opacity-90">
+        <p>&copy; 2026 GREENOVA İZMİR | AHMET HAKKI BALCIOĞLU MTAL 9-A</p>
     </footer>
 
     <script>
-        function fotoEkle() {
-            const input = document.getElementById('fotoInput');
+        // Başlangıç Fotoğrafları
+        let fotograflar = [
+            { id: 1, url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09' },
+            { id: 2, url: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b' }
+        ];
+
+        // SAYFA AÇILIŞINDA ÇALIŞAN KONTROL
+        window.onload = function() {
+            if (localStorage.getItem('greenova_admin') === 'true') {
+                document.body.classList.add('logged-in');
+            }
+            galeriyiGoster();
+        };
+
+        // GİZLİ PANELİ AÇ (Klavyeden 'L' tuşu)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'l' || e.key === 'L') {
+                let sifre = prompt("GreeNova İzmir Yönetici Girişi:");
+                if(sifre === "greenova9a") {
+                    localStorage.setItem('greenova_admin', 'true');
+                    document.body.classList.add('logged-in');
+                    alert("Hoş geldin! Yönetici modu aktif ve tarayıcıya kaydedildi.");
+                    galeriyiGoster();
+                } else {
+                    alert("Hatalı şifre!");
+                }
+            }
+        });
+
+        // YETKİYİ KALDIR (Klavyeden 'X' tuşu)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'x' || e.key === 'X') {
+                localStorage.removeItem('greenova_admin');
+                document.body.classList.remove('logged-in');
+                alert("Yönetici yetkileri bu tarayıcıdan silindi.");
+                galeriyiGoster();
+            }
+        });
+
+        function galeriyiGoster() {
             const grid = document.getElementById('galeriGrid');
-            if (input.files && input.files[0]) {
+            grid.innerHTML = '';
+            fotograflar.forEach(foto => {
+                grid.innerHTML += `
+                    <div class="relative group overflow-hidden rounded-2xl shadow-xl h-72">
+                        <img src="${foto.url}" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                        <button onclick="fotoSil(${foto.id})" class="admin-only absolute top-4 right-4 bg-red-600 text-white font-bold px-4 py-2 rounded-lg hover:bg-red-700 shadow-2xl transition z-20">SİL</button>
+                    </div>`;
+            });
+        }
+
+        function fotoSil(id) {
+            if(confirm('Bu görseli galeriden kaldırmak istiyor musun?')) {
+                fotograflar = fotograflar.filter(f => f.id !== id);
+                galeriyiGoster();
+            }
+        }
+
+        function fotoEkle() {
+            const input = document.getElementById('photoInput');
+            if(input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const html = `
-                        <div class="relative rounded-[30px] overflow-hidden shadow-lg h-72 group bg-slate-100">
-                            <img src="${e.target.result}" class="w-full h-full object-cover">
-                            <button onclick="this.parentElement.remove()" class="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-lg font-bold text-xs uppercase shadow-xl hover:bg-red-700">SİL</button>
-                        </div>`;
-                    grid.insertAdjacentHTML('afterbegin', html);
-                    input.value = '';
-                    document.getElementById('fileName').innerText = "Dosya seçilmedi";
+                    fotograflar.unshift({ id: Date.now(), url: e.target.result });
+                    galeriyiGoster();
                 };
                 reader.readAsDataURL(input.files[0]);
-            } else {
-                alert("Lütfen bir dosya seç kanka!");
             }
         }
     </script>
