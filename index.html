@@ -3,167 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreeNova İzmir | 9-A Projesi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- FIREBASE SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-
+    <title>GreeNova İzmir</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .admin-only { display: none; }
-        .admin-box { border: 2px dashed #4ade80; border-radius: 20px; background-color: #f0fdf4; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; text-align: center; }
+        header { background-color: #2e7d32; color: white; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 20px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .biz-kimiz { text-align: left; padding: 20px; line-height: 1.6; border-bottom: 2px solid #eee; margin-bottom: 30px; }
+        .galeri { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .foto-kart { background: #fff; padding: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .foto-kart img { width: 100%; border-radius: 5px; height: 200px; object-cover: cover; }
+        .yukleme-alani { margin: 30px 0; padding: 20px; background: #e8f5e9; border: 2px dashed #2e7d32; border-radius: 10px; }
+        button { background: #2e7d32; color: white; border: none; padding: 12px 25px; cursor: pointer; border-radius: 5px; font-weight: bold; font-size: 16px; }
+        button:hover { background: #1b5e20; }
+        input[type="file"] { margin-bottom: 15px; }
+        h2 { color: #2e7d32; }
     </style>
 </head>
-<body class="bg-white">
+<body>
 
-    <!-- NAVBAR -->
-    <nav class="flex justify-between items-center px-12 py-6 border-b border-gray-100 sticky top-0 bg-white z-50">
-        <div class="text-green-600 font-black text-2xl tracking-tighter uppercase">GREENOVA İZMİR</div>
-        <div class="space-x-8 text-gray-700 font-medium text-sm">
-            <a href="#home" class="hover:text-green-600">Anasayfa</a>
-            <a href="#about" class="hover:text-green-600">Biz Kimiz</a>
-            <a href="#gallery" class="hover:text-green-600">Galeri</a>
-        </div>
-    </nav>
+<header>
+    <h1>GreeNova İzmir</h1>
+    <p>Yeşilay Sağlıklı Yaşam Projesi - 9/A Sınıfı</p>
+</header>
 
-    <!-- PROJE KİMLİĞİ -->
-    <section id="home" class="px-12 py-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 border-b">
-        <div class="flex-1">
-            <p class="text-green-500 font-bold text-sm tracking-widest mb-4 uppercase">Yeşilay Sağlıklı Yaşam Ligi – İzmir</p>
-            <h1 class="text-6xl font-extrabold text-slate-900 leading-[1.1] mb-8">Proje Kimliği ve Yasal Dayanak</h1>
-            <div class="border-l-8 border-green-500 pl-6 py-2 bg-green-50/50 rounded-r-xl">
-                <p class="text-gray-600 italic text-lg leading-relaxed">
-                    "Bağımlılıkla mücadele, sağlıklı yaşam alışkanlıklarının kazandırılması ve öğrencilerin iyi oluş (well-being) düzeylerinin artırılmasına yönelik geliştirilen; okul temelli, uygulama odaklı ve ölçülebilir çıktılar içeren yenilikçi bir eğitim modelidir."
-                </p>
-            </div>
-        </div>
-        <div class="flex-1">
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="rounded-[40px] shadow-2xl w-full object-cover aspect-[4/3]">
-        </div>
-    </section>
+<div class="container">
+    <div class="biz-kimiz">
+        <h2>Biz Kimiz?</h2>
+        <p>Bizler, İzmir'in yarınlarını inşa eden genç çevrecileriz. 9-A sınıfı olarak, Yeşilay'ın değerlerini teknoloji ve sanatla birleştirerek bu platformu oluşturduk.</p>
+        <p>Amacımız, çevresel farkındalığı artırmak ve doğanın eşsiz güzelliklerini herkesle paylaşarak yeşil bir gelecek bırakmaktır. Sitemizdeki her kare, bizim temiz dünya hayalimizin bir parçasıdır.</p>
+    </div>
 
-    <!-- BİZ KİMİZ? -->
-    <section id="about" class="px-12 py-24 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 bg-white border-b">
-        <div class="flex-1">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" class="rounded-[40px] shadow-xl w-full object-cover aspect-square md:aspect-video">
-        </div>
-        <div class="flex-1">
-            <h2 class="text-3xl font-bold text-green-600 mb-6 uppercase tracking-tight">BİZ KİMİZ?</h2>
-            <div class="text-gray-700 space-y-6 leading-relaxed text-lg">
-                <p>Biz, <strong>Ahmet Hakkı Balcıoğlu Ticaret Meslek ve Teknik Anadolu Lisesi 9-A sınıfının</strong> ekibi; <strong>GreeNova'yız!</strong></p>
-                <p>Sitemizdeki her kare, bizim temiz dünya hayalimizin bir parçasıdır.</p>
-            </div>
-            <div class="mt-8 bg-green-600 text-white p-6 rounded-2xl font-bold text-center text-xl shadow-lg">
-                "Biz sadece projeler üretmiyoruz; geleceği de tasarlıyoruz!"
-            </div>
-        </div>
-    </section>
+    <div class="yukleme-alani">
+        <h3>Yeni Fotoğraf Ekle</h3>
+        <input type="file" id="fotoInput" accept="image/*"><br>
+        <button onclick="fotoEkle()">GALERİYE EKLE</button>
+    </div>
 
-    <!-- GALERİ (image_90b41e.jpg Düzeni) -->
-    <section id="gallery" class="px-12 py-20 bg-white min-h-screen">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-5xl font-bold text-slate-800 mb-2">Galeri</h2>
-            <p class="text-green-600 italic mb-12 text-lg">Sağlık ve İyilik Hareketi'nden Kareler</p>
+    <h2>Etkinlik Galerisi</h2>
+    <div id="galeri" class="galeri">
+        <!-- Fotoğraflar buraya gelecek -->
+    </div>
+</div>
 
-            <!-- ADMİN YÜKLEME PANELİ (image_90b41e.jpg'deki tasarım) -->
-            <div id="adminPanel" class="admin-only admin-box p-12 mb-16 shadow-sm">
-                <p class="text-green-700 font-bold text-sm mb-6 tracking-widest uppercase">YENİ FOTOĞRAF YÜKLE (ADMİN)</p>
-                <div class="flex flex-col items-center gap-6">
-                    <div class="flex items-center gap-4">
-                        <label class="bg-green-600 text-white px-6 py-2 rounded-full font-bold cursor-pointer hover:bg-green-700">
-                            Dosya Seç <input type="file" id="fotoInput" class="hidden" onchange="document.getElementById('fileName').innerText = this.files[0].name">
-                        </label>
-                        <span id="fileName" class="text-gray-400 text-sm italic">Dosya seçilmedi</span>
-                    </div>
-                    <button onclick="fotoEkle()" id="yukleBtn" class="w-full bg-green-500 text-white py-4 rounded-2xl font-black text-xl hover:bg-green-600 transition-all uppercase shadow-md">
-                        GALERİDE YAYINLA
-                    </button>
-                    <p class="text-gray-400 text-[10px] uppercase tracking-widest">ÇIKIŞ YAPMAK İÇİN 'X' TUŞUNA BAS</p>
-                </div>
-            </div>
+<script>
+    // FOTOĞRAF EKLEME FONKSİYONU
+    function fotoEkle() {
+        const input = document.getElementById('fotoInput');
+        const galeri = document.getElementById('galeri');
 
-            <!-- FOTOĞRAFLAR -->
-            <div id="galeriGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Veritabanındaki resimler -->
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-8 text-center text-gray-400 text-xs">
-        © 2026 GreeNova İzmir | 9-A Projesi
-    </footer>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCyeATDHNqFPdYDnjZwu4WE0s_IXYFbXq0",
-            authDomain: "greenovagaleri.firebaseapp.com",
-            projectId: "greenovagaleri",
-            storageBucket: "greenovagaleri.firebasestorage.app",
-            messagingSenderId: "536132833624",
-            appId: "1:536132833624:web:6e8742e9b435829fa83e2d"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        let isAdmin = false;
-
-        function galeriyiGetir() {
-            db.collection("galeri").orderBy("zaman", "desc").onSnapshot((snapshot) => {
-                const grid = document.getElementById('galeriGrid');
-                grid.innerHTML = '';
-                snapshot.forEach((doc) => {
-                    const veri = doc.data();
-                    grid.innerHTML += `
-                        <div class="relative rounded-[30px] overflow-hidden shadow-lg h-72 group bg-slate-100">
-                            <img src="${veri.url}" class="w-full h-full object-cover">
-                            <button onclick="fotoSil('${doc.id}')" class="admin-only absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-lg font-bold text-xs uppercase shadow-xl hover:bg-red-700">SİL</button>
-                        </div>`;
-                });
-                adminGuncelle();
-            });
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const yeniKart = document.createElement('div');
+                yeniKart.className = 'foto-kart';
+                yeniKart.innerHTML = `<img src="${e.target.result}">`;
+                galeri.appendChild(yeniKart);
+                
+                // Inputu temizle
+                input.value = '';
+            };
+            
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            alert('Lütfen bir fotoğraf seç kanka!');
         }
+    }
+</script>
 
-        async function fotoEkle() {
-            const input = document.getElementById('fotoInput');
-            const btn = document.getElementById('yukleBtn');
-            if (input.files && input.files[0]) {
-                btn.disabled = true; btn.innerText = "YÜKLENİYOR...";
-                const reader = new FileReader();
-                reader.onload = async (e) => {
-                    await db.collection("galeri").add({ url: e.target.result, zaman: Date.now() });
-                    input.value = ''; document.getElementById('fileName').innerText = "Dosya seçilmedi";
-                    btn.disabled = false; btn.innerText = "GALERİDE YAYINLA";
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function fotoSil(id) { if(confirm('Silinsin mi?')) db.collection("galeri").doc(id).delete(); }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === 'l') {
-                if (prompt('Yönetici Şifresi:') === 'greenova9a') { isAdmin = true; adminGuncelle(); }
-            }
-            if (e.key.toLowerCase() === 'x') { isAdmin = false; adminGuncelle(); }
-        });
-
-        function adminGuncelle() {
-            const panel = document.getElementById('adminPanel');
-            const btns = document.querySelectorAll('.admin-only');
-            if (isAdmin) {
-                if(panel) panel.style.display = 'block';
-                btns.forEach(b => b.style.display = 'block');
-            } else {
-                if(panel) panel.style.display = 'none';
-                btns.forEach(b => b.style.display = 'none');
-            }
-        }
-
-        window.onload = galeriyiGetir;
-    </script>
 </body>
 </html>
